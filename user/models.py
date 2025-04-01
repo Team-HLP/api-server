@@ -1,8 +1,6 @@
-from sqlalchemy import Column, TEXT, INT, BIGINT, String, Boolean
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, BIGINT, String, Boolean, func, DateTime
 from sqlalchemy.dialects.mysql import MEDIUMTEXT
-
-Base = declarative_base()
+from datebase import Base
 
 class Users(Base):
     __tablename__ = "users"
@@ -12,3 +10,5 @@ class Users(Base):
     password = Column(MEDIUMTEXT, nullable=False, comment="`유저 비밀번호")
     username = Column(String(50), nullable=False, comment="유저 이름")
     sex = Column(Boolean, nullable=False, comment="성별")
+    created_at = Column(DateTime, default=func.now())
+    updated_at = Column(DateTime, default=func.now(), onupdate=func.now())
