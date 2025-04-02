@@ -2,7 +2,7 @@ from sqlalchemy import Column, BIGINT, String, Boolean, func, DateTime
 from sqlalchemy.dialects.mysql import MEDIUMTEXT
 from datebase import Base
 
-class Users(Base):
+class User(Base):
     __tablename__ = "users"
 
     id = Column(BIGINT, nullable=False, autoincrement=True, primary_key=True, comment="유저 고유 id")
