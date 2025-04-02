@@ -14,5 +14,6 @@ class UserLoginRequest(BaseModel):
     login_id: str
     password: str
 
+# Response
 class UserLoginResponse(BaseModel):
     access_token: str
