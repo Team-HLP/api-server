@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from user.router import router as user_router
-from user.models import Users
 from datebase import Base, engine
 
 app = FastAPI()
