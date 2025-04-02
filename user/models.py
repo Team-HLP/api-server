@@ -1,5 +1,6 @@
 from sqlalchemy import Column, BIGINT, String, Boolean, func, DateTime
 from sqlalchemy.dialects.mysql import MEDIUMTEXT
+from sqlalchemy.orm import relationship
 from datebase import Base
 
 class User(Base):
@@ -12,3 +13,5 @@ class User(Base):
     sex = Column(Boolean, nullable=False, comment="성별")
     created_at = Column(DateTime, default=func.now())
     updated_at = Column(DateTime, default=func.now(), onupdate=func.now())
+
+    games = relationship("Game", back_populates="user", cascade="all, delete-orphan")

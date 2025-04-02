@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from user.router import router as user_router
+from user.models import User
+from game.models import Game
 from datebase import Base, engine
 
 app = FastAPI()
