@@ -23,3 +23,12 @@ def register_user(user_create: UserCreateRequest, db: Session = Depends(get_db))
 
     db.add(new_user)
     db.commit()
+
+@router.post("/login", status_code=200)
+def login_user(user_login: UserLoginRequest, db: Session = Depends(get_db)):
+    db_user = db.query(Users).filter(Users.login_id == user_login.login_id).first()
+    if not db_user:
+        raise HTTPException(status_code=400, detail="존재하지 않는 유저입니다")
+    
+    if not verify_password(user_login.password, db_user.password):
+        raise HTTPException(status_code=400, detail="비밀번호가 올바르지 않습니다.")

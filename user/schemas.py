@@ -9,3 +9,7 @@ class UserCreateRequest(BaseModel):
     password: str
     username: str
     sex: bool
+
+class UserLoginRequest(BaseModel):
+    login_id: str
+    password: str
