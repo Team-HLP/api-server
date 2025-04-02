@@ -13,3 +13,6 @@ class UserCreateRequest(BaseModel):
 class UserLoginRequest(BaseModel):
     login_id: str
     password: str
+
+class UserLoginResponse(BaseModel):
+    access_token: str
