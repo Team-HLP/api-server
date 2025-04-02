@@ -2,7 +2,6 @@ from pydantic import BaseModel
 
 # Request
 class GameCreateRequest(BaseModel):
-    user_id: int
     meteorite_broken_count: int
     play_time_seconds: int
 
