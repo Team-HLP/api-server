@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from datebase import get_db
+from datebase import get_mysql
 from user.models import User
 from game.models import Game
 from game.schemas import *
@@ -12,7 +12,7 @@ router = APIRouter()
 def save_game(
     game_create: GameCreateRequest,
     current_user: User = Depends(get_current_user), 
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_mysql)
 ):
     new_game = Game(
         user_id=current_user.id,
@@ -34,7 +34,7 @@ def save_game(
 @router.get("", response_model=list[GameResponse], status_code=200)
 def get_games(
     current_user: User = Depends(get_current_user), 
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_mysql)
 ):
     return db.query(Game).filter(Game.user_id == current_user.id).all()
 
@@ -42,7 +42,7 @@ def get_games(
 def get_game(
     game_id: int,
     current_user: User = Depends(get_current_user), 
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_mysql)
 ):
     game = db.query(Game).filter(Game.id == game_id, Game.user_id == current_user.id).first()
     if not game:

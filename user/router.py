@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from datebase import get_db
+from datebase import get_mysql
 from user.models import User
 from user.schemas import *
 from user.auth import *
@@ -8,7 +8,7 @@ from user.auth import *
 router = APIRouter()
 
 @router.post("/register", status_code=201)
-def register_user(user_create: UserCreateRequest, db: Session = Depends(get_db)):
+def register_user(user_create: UserCreateRequest, db: Session = Depends(get_mysql)):
     exist_user = db.query(User).filter(User.login_id == user_create.login_id).first()
     if exist_user:
         raise HTTPException(status_code=409, detail="이미 존재하는 사용자 ID입니다.")
@@ -25,7 +25,7 @@ def register_user(user_create: UserCreateRequest, db: Session = Depends(get_db))
     db.commit()
 
 @router.post("/login", status_code=200, response_model=UserLoginResponse)
-def login_user(user_login: UserLoginRequest, db: Session = Depends(get_db)):
+def login_user(user_login: UserLoginRequest, db: Session = Depends(get_mysql)):
     db_user = db.query(User).filter(User.login_id == user_login.login_id).first()
 
     if not db_user:
