@@ -10,7 +10,7 @@ class GameCreateRequest(BaseModel):
 
 # Response
 class GameResponse(BaseModel):
-    game_id: int
+    id: int
     user_id: int
     meteorite_broken_count: int
     play_time_seconds: int
