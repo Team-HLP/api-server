@@ -15,5 +15,6 @@ class GameResponse(BaseModel):
     meteorite_broken_count: int
     play_time_seconds: int
     blink_eye_count: int
-    avg_pupil_size: float
+    avg_left_eye_pupil_size: float
+    avg_right_eye_pupil_size: float
     created_at: datetime
