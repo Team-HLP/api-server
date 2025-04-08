@@ -10,7 +10,8 @@ class Game(Base):
     meteorite_broken_count = Column(BIGINT, nullable=False, comment="운석 파괴 횟수")
     play_time_seconds = Column(Integer, nullable=False, comment="플레이 타임 (초 단위)")
     blink_eye_count = Column(Integer, nullable=False, comment="눈 깜빡임 횟수")
-    avg_pupil_size = Column(Float, nullable=False, comment="평균 동공 크기")
-    created_at = Column(DateTime, nullable=False, default=func.now())
+    avg_left_eye_pupil_size = Column(Float, nullable=False, comment="평균 왼쪽 동공 크기")
+    avg_right_eye_pupil_size = Column(Float, nullable=False, comment="평균 오른쪽 동공 크기")
+    created_at = Column(DateTime, nullable=False, default=func.now(), server_default=func.now(), comment="기록 생성 시각")
 
     user = relationship("User", back_populates="games")

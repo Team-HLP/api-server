@@ -37,10 +37,10 @@ def save_game(
 
 @router.get("", response_model=list[GameResponse], status_code=200)
 def get_games(
-    current_user: User = Depends(get_current_user), 
+    # current_user: User = Depends(get_current_user), 
     db: Session = Depends(get_mysql)
 ):
-    return db.query(Game).filter(Game.user_id == current_user.id).all()
+    return db.query(Game).filter(Game.user_id == 2).all()
 
 @router.get("/{gameId}", response_model=GameResponse, status_code=200)
 def get_game(
