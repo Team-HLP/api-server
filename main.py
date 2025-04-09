@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from datebase import Base, engine
+from fastapi.middleware.cors import CORSMiddleware
+from config import ORIGINS
 from user.router import router as user_router
 from user.models import User
 from game.router import router as game_router
@@ -14,3 +16,10 @@ app.include_router(game_router, prefix="/game", tags=["game"])
 app.include_router(gaze_router, prefix="/gaze", tags=["gaze"])
 
 Base.metadata.create_all(bind=engine)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=ORIGINS,
+    allow_methods=["GET", "POST", "DELETE", "PUT"],
+    allow_headers=["*"]
+)
